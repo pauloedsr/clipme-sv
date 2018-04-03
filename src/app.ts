@@ -24,6 +24,7 @@ import * as homeController from "./controllers/home";
 import * as userController from "./controllers/user";
 import * as apiController from "./controllers/api";
 import * as contactController from "./controllers/contact";
+import * as clipmeController from "./controllers/clipme";
 
 
 // API keys and Passport configuration
@@ -90,9 +91,11 @@ app.use(
 /**
  * Primary app routes.
  */
+app.get("/clipme", clipmeController.clipme);
+app.post("/clipme", passportConfig.isAuthenticated, clipmeController.paste);
 app.get("/", homeController.index);
 app.get("/login", userController.getLogin);
-app.post("/login", userController.postLogin);
+app.post("/login-api", userController.postLoginApi);
 app.get("/logout", userController.logout);
 app.get("/forgot", userController.getForgot);
 app.post("/forgot", userController.postForgot);

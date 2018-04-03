@@ -7,6 +7,7 @@ import { Request, Response, NextFunction } from "express";
 import { IVerifyOptions } from "passport-local";
 import { WriteError } from "mongodb";
 const request = require("express-validator");
+const jwt = require("jsonwebtoken");
 
 
 /**
@@ -48,6 +49,31 @@ export let postLogin = (req: Request, res: Response, next: NextFunction) => {
       if (err) { return next(err); }
       req.flash("success", { msg: "Success! You are logged in." });
       res.redirect(req.session.returnTo || "/");
+    });
+  })(req, res, next);
+};
+
+export let postLoginApi = (req: Request, res: Response, next: NextFunction) => {
+  req.assert("email", "Email is not valid").isEmail();
+  req.assert("password", "Password cannot be blank").notEmpty();
+  req.sanitize("email").normalizeEmail({ gmail_remove_dots: false });
+
+  const errors = req.validationErrors();
+
+  if (errors) {
+    req.flash("errors", errors);
+    return res.json({success: false, errors : errors});
+  }
+
+  passport.authenticate("local", (err: Error, user: UserModel, info: IVerifyOptions) => {
+    if (err) { return next(err); }
+    if (!user) {
+      return res.json({success: false, errors : [{msg: info.message}]});
+    }
+    req.login(user, (err) => {
+      if (err) { return next(err); }
+      const token = jwt.sign(user.toJSON(), "your_jwt_secretCLIPME");
+      return res.json({user, token});
     });
   })(req, res, next);
 };
