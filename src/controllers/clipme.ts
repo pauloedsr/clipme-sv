@@ -41,7 +41,7 @@ export let update = (req: Request, res: Response, next: NextFunction) => {
     return res.json({success: false, errors : errors});
   }
 
-  Clip.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, obj) => {
+  Clip.findByIdAndUpdate(req.body.id, req.body, {new: true}, (err, obj) => {
     if (err) return next(err);
     res.json({success: true, obj: obj});
   });
