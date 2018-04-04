@@ -1,0 +1,156 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Clipme",
+		"_postman_id": "cac8e128-55a8-ff53-78fd-e085fb0f66d7",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"url": "http://localhost:3000/login-api",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\" : \"pauloedsr@gmail.com\",\n\t\"password\": \"1234\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Inclui Clip",
+			"request": {
+				"url": "http://localhost:3000/clipme",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNWFjMjQ2OTcxYmJiMmU1Mjk0ZmJkMTA2IiwiaWF0IjoxNTIyODYxMDk5fQ.TF4F-GDk7YTgVAOkvyKBQ0tD0tmqpnRhxpCRTM5I8z4",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"clip\": \"UG9yIGNvbnNlZ3VpbnRlLCBvIG5vdm8gbW9kZWxvIGVzdHJ1dHVyYWwgYXF1aSBwcmVjb25pemFkbyBwcm9tb3ZlIGEgYWxhdmFuY2FnZW0gZGFzIGRpcmV0cml6ZXMgZGUgZGVzZW52b2x2aW1lbnRvIHBhcmEgbyBmdXR1cm8u\",\n\t\"autor\": \"5ac5108ef113270afc2a58b2\",\n\t\"timeline\": \"5ac51f9bee70f63420fb699c\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Inclui Timeline",
+			"request": {
+				"url": "http://localhost:3000/timeline",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNWFjMjQ2OTcxYmJiMmU1Mjk0ZmJkMTA2IiwiaWF0IjoxNTIyODYxMDk5fQ.TF4F-GDk7YTgVAOkvyKBQ0tD0tmqpnRhxpCRTM5I8z4",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"clip\": \"TyBpbmNlbnRpdm8gYW8gYXZhbsOnbyB0ZWNub2zDs2dpY28sIGFzc2ltIGNvbW8gYSBjb25zdGFudGUgZGl2dWxnYcOnw6NvIGRhcyBpbmZvcm1hw6fDtWVzIGV4aWdlIGEgcHJlY2lzw6NvIGUgYSBkZWZpbmnDp8OjbyBkYXMgZm9ybWFzIGRlIGHDp8Ojby4=\",\n\t\"autor\": \"5ac5108ef113270afc2a58b2\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Lista Timelines",
+			"request": {
+				"url": "http://localhost:3000/timeline/list",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNWFjMjQ2OTcxYmJiMmU1Mjk0ZmJkMTA2IiwiaWF0IjoxNTIyODYxMDk5fQ.TF4F-GDk7YTgVAOkvyKBQ0tD0tmqpnRhxpCRTM5I8z4",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nome\": \"Segunda teste\",\n\t\"autor\": \"5ac5108ef113270afc2a58b2\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "View Timelines",
+			"request": {
+				"url": "http://localhost:3000/timeline/view/5ac51f9bee70f63420fb699c",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNWFjMjQ2OTcxYmJiMmU1Mjk0ZmJkMTA2IiwiaWF0IjoxNTIyODYxMDk5fQ.TF4F-GDk7YTgVAOkvyKBQ0tD0tmqpnRhxpCRTM5I8z4",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nome\": \"Segunda teste\",\n\t\"autor\": \"5ac5108ef113270afc2a58b2\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Update Clip",
+			"request": {
+				"url": "http://localhost:3000/clipme/5ac526f2f05d663114b8795c",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNWFjMjQ2OTcxYmJiMmU1Mjk0ZmJkMTA2IiwiaWF0IjoxNTIyODYxMDk5fQ.TF4F-GDk7YTgVAOkvyKBQ0tD0tmqpnRhxpCRTM5I8z4",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"clip\": \"UG9yIGNvbnNlZ3VpbnRlLCBvIG5vdm8gbW9kZWxvIGVzdHJ1dHVyYWwgYXF1aSBwcmVjb25pemFkbyBwcm9tb3ZlIGEgYWxhdmFuY2FnZW0gZGFzIGRpcmV0cml6ZXMgZGUgZGVzZW52b2x2aW1lbnRvIHBhcmEgbyBmdXR1cm8u\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

@@ -13,10 +13,10 @@ export let clipme = (req: Request, res: Response) => {
 };
 
 export let paste = (req: Request, res: Response, next: NextFunction) => {
+  req.assert("timeline", "Timeline não informada").notEmpty();
   req.assert("autor", "Autor é necessário").notEmpty();
   req.assert("clip", "Não é um base 64 válido").isBase64();
 
-  console.log(req.body);
   const errors = req.validationErrors();
 
   if (errors) {
@@ -27,6 +27,22 @@ export let paste = (req: Request, res: Response, next: NextFunction) => {
   const clip = new Clip(req.body);
   clip.save((err) => {
     if (err) { return next(err); }
-    res.json({success: true});
+    res.json({success: true, obj: clip});
+  });
+};
+
+export let update = (req: Request, res: Response, next: NextFunction) => {
+  req.assert("clip", "Não é um base 64 válido").isBase64();
+  req.assert("id", "ID é necessário").notEmpty();
+
+  const errors = req.validationErrors();
+
+  if (errors) {
+    return res.json({success: false, errors : errors});
+  }
+
+  Clip.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, obj) => {
+    if (err) return next(err);
+    res.json({success: true, obj: obj});
   });
 };

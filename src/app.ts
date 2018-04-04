@@ -25,6 +25,7 @@ import * as userController from "./controllers/user";
 import * as apiController from "./controllers/api";
 import * as contactController from "./controllers/contact";
 import * as clipmeController from "./controllers/clipme";
+import * as timelineController from "./controllers/timeline";
 
 
 // API keys and Passport configuration
@@ -93,6 +94,10 @@ app.use(
  */
 app.get("/clipme", clipmeController.clipme);
 app.post("/clipme", passport.authenticate("jwt", {session: false}), clipmeController.paste);
+app.put("/clipme/:id", passport.authenticate("jwt", {session: false}), clipmeController.update);
+app.post("/timeline", passport.authenticate("jwt", {session: false}), timelineController.create);
+app.get("/timeline/list", passport.authenticate("jwt", {session: false}), timelineController.list);
+app.get("/timeline/view/:id", passport.authenticate("jwt", {session: false}), timelineController.view);
 app.get("/", homeController.index);
 app.get("/login", userController.getLogin);
 app.post("/login-api", userController.postLoginApi);

@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 
 
 export type ClipModel = mongoose.Document & {
+  timeline: string
   autor: string,
   clip: string,
   anexo: {
@@ -14,6 +15,7 @@ export type ClipModel = mongoose.Document & {
 };
 
 const clipSchema = new mongoose.Schema({
+  timeline: String,
   autor: String,
   clip: String,
   anexo: {
