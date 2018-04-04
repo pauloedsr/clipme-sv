@@ -12,8 +12,8 @@ export let clipme = (req: Request, res: Response) => {
   });
 };
 
-
 export let paste = (req: Request, res: Response, next: NextFunction) => {
+  req.assert("autor", "Autor é necessário").notEmpty();
   req.assert("clip", "Não é um base 64 válido").isBase64();
 
   console.log(req.body);
@@ -24,13 +24,9 @@ export let paste = (req: Request, res: Response, next: NextFunction) => {
     return res.json({success: false, errors : errors});
   }
 
-  const clip = new Clip({
-    idUser: req.body.idUser,
-    clip: req.body.clip
-  });
-
-    clip.save((err) => {
-      if (err) { return next(err); }
-      res.json({success: true});
+  const clip = new Clip(req.body);
+  clip.save((err) => {
+    if (err) { return next(err); }
+    res.json({success: true});
   });
 };

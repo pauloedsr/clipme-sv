@@ -28,7 +28,7 @@ passport.deserializeUser((id, done) => {
 passport.use(new JWTStrategy({
   jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
   secretOrKey   : "your_jwt_secretCLIPME"
-}, (jwtPayload: any, cb) => {
+}, (jwtPayload: any, cb: any) => {
   console.log(jwtPayload);
   return User.findById(jwtPayload.user)
       .then(user => {
