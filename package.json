@@ -1,12 +1,12 @@
 {
-  "name": "express-typescript-starter",
+  "name": "clipme",
   "version": "0.1.0",
-  "description": "A starting point for Node.js express apps with TypeScript",
+  "description": "Transfira facilmente textos do celular para o pc",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Microsoft/TypeScript-Node-Starter"
+    "url": "https://github.com/pauloedsr/clipme-sv"
   },
-  "author": "Bowden Kelly",
+  "author": "Paulo Eduardo",
   "license": "MIT",
   "scripts": {
     "start": "npm run serve",

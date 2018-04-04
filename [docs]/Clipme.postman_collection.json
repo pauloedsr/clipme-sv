@@ -130,7 +130,7 @@
 		{
 			"name": "Update Clip",
 			"request": {
-				"url": "http://localhost:3000/clipme/5ac526f2f05d663114b8795c",
+				"url": "http://localhost:3000/clipme",
 				"method": "PUT",
 				"header": [
 					{
@@ -146,7 +146,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"clip\": \"UG9yIGNvbnNlZ3VpbnRlLCBvIG5vdm8gbW9kZWxvIGVzdHJ1dHVyYWwgYXF1aSBwcmVjb25pemFkbyBwcm9tb3ZlIGEgYWxhdmFuY2FnZW0gZGFzIGRpcmV0cml6ZXMgZGUgZGVzZW52b2x2aW1lbnRvIHBhcmEgbyBmdXR1cm8u\"\n}"
+					"raw": "{\n\t\"id\": \"5ac526f2f05d663114b8795c\",\n\t\"clip\": \"UG9yIGNvbnNlZ3VpbnRlLCBvIG5vdm8gbW9kZWxvIGVzdHJ1dHVyYWwgYXF1aSBwcmVjb25pemFkbyBwcm9tb3ZlIGEgYWxhdmFuY2FnZW0gZGFzIGRpcmV0cml6ZXMgZGUgZGVzZW52b2x2aW1lbnRvIHBhcmEgbyBmdXR1cm8u\"\n}"
 				},
 				"description": ""
 			},
