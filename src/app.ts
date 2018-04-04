@@ -92,7 +92,7 @@ app.use(
  * Primary app routes.
  */
 app.get("/clipme", clipmeController.clipme);
-app.post("/clipme", passportConfig.isAuthenticated, clipmeController.paste);
+app.post("/clipme", passport.authenticate("jwt", {session: false}), clipmeController.paste);
 app.get("/", homeController.index);
 app.get("/login", userController.getLogin);
 app.post("/login-api", userController.postLoginApi);

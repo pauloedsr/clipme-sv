@@ -5,8 +5,12 @@ import passportFacebook from "passport-facebook";
 import _ from "lodash";
 
 // import { User, UserType } from '../models/User';
-import { default as User } from "../models/User";
+import { default as User, UserModel } from "../models/User";
 import { Request, Response, NextFunction } from "express";
+
+const passportJWT = require("passport-jwt");
+const JWTStrategy = passportJWT.Strategy;
+const ExtractJWT = passportJWT.ExtractJwt;
 
 const LocalStrategy = passportLocal.Strategy;
 const FacebookStrategy = passportFacebook.Strategy;
@@ -21,10 +25,26 @@ passport.deserializeUser((id, done) => {
   });
 });
 
+passport.use(new JWTStrategy({
+  jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+  secretOrKey   : "your_jwt_secretCLIPME"
+}, (jwtPayload: any, cb) => {
+  console.log(jwtPayload);
+  return User.findById(jwtPayload.user)
+      .then(user => {
+          return cb(undefined, user);
+      })
+      .catch(err => {
+          return cb(err);
+      });
+}
+));
+
 
 /**
  * Sign in using Email and Password.
  */
+
 passport.use(new LocalStrategy({ usernameField: "email", passwordField: "password" }, (email, password, done) => {
   User.findOne({ email: email.toLowerCase() }, (err, user: any) => {
     if (err) { return done(err); }

@@ -65,14 +65,14 @@ export let postLoginApi = (req: Request, res: Response, next: NextFunction) => {
     return res.json({success: false, errors : errors});
   }
 
-  passport.authenticate("local", (err: Error, user: UserModel, info: IVerifyOptions) => {
+  passport.authenticate("local", {session: false}, (err: Error, user: UserModel, info: IVerifyOptions) => {
     if (err) { return next(err); }
     if (!user) {
       return res.json({success: false, errors : [{msg: info.message}]});
     }
-    req.login(user, (err) => {
+    req.login(user, {session: false}, (err) => {
       if (err) { return next(err); }
-      const token = jwt.sign(user.toJSON(), "your_jwt_secretCLIPME");
+      const token = jwt.sign({user: user._id}, "your_jwt_secretCLIPME");
       return res.json({user, token});
     });
   })(req, res, next);
