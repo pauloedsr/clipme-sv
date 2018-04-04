@@ -92,9 +92,9 @@ app.use(
 /**
  * Primary app routes.
  */
-app.get("/clipme", clipmeController.clipme);
 app.post("/clipme", passport.authenticate("jwt", {session: false}), clipmeController.paste);
 app.put("/clipme", passport.authenticate("jwt", {session: false}), clipmeController.update);
+app.delete("/clipme/:id", passport.authenticate("jwt", {session: false}), clipmeController.remove);
 app.post("/timeline", passport.authenticate("jwt", {session: false}), timelineController.create);
 app.get("/timeline/list", passport.authenticate("jwt", {session: false}), timelineController.list);
 app.get("/timeline/view/:id", passport.authenticate("jwt", {session: false}), timelineController.view);
