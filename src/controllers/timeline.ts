@@ -2,16 +2,6 @@ import { default as Timeline, TimelineModel } from "../models/Timeline";
 import { default as Clip, ClipModel } from "../models/Clip";
 import { Request, Response, NextFunction } from "express";
 
-/**
- * GET /
- * Home page.
- */
-export let get = (req: Request, res: Response) => {
-  res.setHeader("Content-Type", "application/json");
-  res.json({
-    title: "Homed"
-  });
-};
 
 export let create = (req: Request, res: Response, next: NextFunction) => {
   req.assert("autor", "Autor é necessário").notEmpty();
@@ -28,8 +18,11 @@ export let create = (req: Request, res: Response, next: NextFunction) => {
   });
 };
 
+/**
+ * Lista as timelines de acordo com autor
+ */
 export let list = (req: Request, res: Response, next: NextFunction) => {
-  Timeline.find({}, (err, timelines) => {
+  Timeline.find({autor : req.params.autor}, (err, timelines) => {
     if (err) { return next(err); }
     if (timelines)
       return res.json(timelines);
@@ -61,6 +54,26 @@ export let view = (req: Request, res: Response, next: NextFunction) => {
       clips = data;
     }).then(() => {
       return res.json({timeline: timeline, clips: clips});
+    });
+  });
+};
+
+/**
+ * Remove
+ */
+export let remove = (req: Request, res: Response, next: NextFunction) => {
+  req.assert("id", "ID é necessário").notEmpty();
+
+  const errors = req.validationErrors();
+  if (errors) {
+    return res.json({success: false, errors : errors});
+  }
+
+  Clip.remove({timeline : req.params.id}, (err) => {
+    if (err) return next(err);
+  }).then(() => {
+    Timeline.findByIdAndRemove(req.params.id).then(() => {
+      return res.json({success: true});
     });
   });
 };

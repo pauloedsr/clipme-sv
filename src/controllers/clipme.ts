@@ -1,7 +1,10 @@
 import { default as Clip, ClipModel } from "../models/Clip";
 import { Request, Response, NextFunction } from "express";
 
-export let paste = (req: Request, res: Response, next: NextFunction) => {
+/**
+ * Cria
+ */
+export let create = (req: Request, res: Response, next: NextFunction) => {
   req.assert("timeline", "Timeline não informada").notEmpty();
   req.assert("autor", "Autor é necessário").notEmpty();
   req.assert("clip", "Não é um base 64 válido").isBase64();
@@ -20,6 +23,9 @@ export let paste = (req: Request, res: Response, next: NextFunction) => {
   });
 };
 
+/**
+ * Atualiza
+ */
 export let update = (req: Request, res: Response, next: NextFunction) => {
   req.assert("clip", "Não é um base 64 válido").isBase64();
   req.assert("id", "ID é necessário").notEmpty();
@@ -35,6 +41,9 @@ export let update = (req: Request, res: Response, next: NextFunction) => {
   });
 };
 
+/**
+ * Remove
+ */
 export let remove = (req: Request, res: Response, next: NextFunction) => {
   req.assert("id", "ID é necessário").notEmpty();
 
