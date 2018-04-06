@@ -54,26 +54,25 @@ export let postLogin = (req: Request, res: Response, next: NextFunction) => {
 };
 
 export let postLoginApi = (req: Request, res: Response, next: NextFunction) => {
-  req.assert("email", "Email is not valid").isEmail();
-  req.assert("password", "Password cannot be blank").notEmpty();
+  req.assert("email", "Email inválido").isEmail();
+  req.assert("password", "Digite a senha").notEmpty();
   req.sanitize("email").normalizeEmail({ gmail_remove_dots: false });
 
   const errors = req.validationErrors();
 
   if (errors) {
-    req.flash("errors", errors);
-    return res.json({success: false, errors : errors});
+    return res.status(403).json({success: false, errors : errors});
   }
 
   passport.authenticate("local", {session: false}, (err: Error, user: UserModel, info: IVerifyOptions) => {
     if (err) { return next(err); }
     if (!user) {
-      return res.json({success: false, errors : [{msg: info.message}]});
+      return res.status(403).json({success: false, errors : [{msg: info.message}]});
     }
     req.login(user, {session: false}, (err) => {
       if (err) { return next(err); }
       const token = jwt.sign({user: user._id}, "your_jwt_secretCLIPME");
-      return res.json({user, token});
+      return res.json({user, token, success: true});
     });
   })(req, res, next);
 };
