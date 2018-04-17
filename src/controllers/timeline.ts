@@ -52,7 +52,7 @@ export let view = (req: Request, res: Response, next: NextFunction) => {
   }).then(() => {
     Clip.find({timeline: id}, (err, data) => {
       clips = data;
-    }).then(() => {
+    }).sort({createdAt : -1}).then(() => {
       return res.json({timeline: timeline, clips: clips});
     });
   });
