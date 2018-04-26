@@ -101,7 +101,9 @@ app.get("/timeline/view/:id", passport.authenticate("jwt", {session: false}), ti
 app.delete("/timeline/:id", passport.authenticate("jwt", {session: false}), timelineController.remove);
 
 app.get("/", homeController.index);
+app.get("/view/:id", passportConfig.isAuthenticated, homeController.view);
 app.get("/login", userController.getLogin);
+app.post("/login", userController.postLogin);
 app.post("/login-api", userController.postLoginApi);
 app.get("/logout", userController.logout);
 app.get("/forgot", userController.getForgot);

@@ -7,7 +7,7 @@ import { Request, Response, NextFunction } from "express";
 export let create = (req: Request, res: Response, next: NextFunction) => {
   req.assert("timeline", "Timeline não informada").notEmpty();
   req.assert("autor", "Autor é necessário").notEmpty();
-  req.assert("clip", "Não é um base 64 válido").isBase64();
+  // req.assert("clip", "Não é um base 64 válido").isBase64();
 
   const errors = req.validationErrors();
 

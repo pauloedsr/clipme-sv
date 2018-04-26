@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  h1= timeline.nome == undefined ? 'Lista desconhecida' : timeline.nome
+  ul(style="white-space: pre;")
+    each clip in clips
+     li= clip.clip
